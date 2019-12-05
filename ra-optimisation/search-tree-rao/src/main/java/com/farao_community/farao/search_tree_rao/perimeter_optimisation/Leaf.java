@@ -7,10 +7,10 @@
 package com.farao_community.farao.search_tree_rao.perimeter_optimisation;
 
 import com.farao_community.farao.commons.FaraoException;
+import com.farao_community.farao.data.crac_api.Crac;
 import com.farao_community.farao.data.crac_api.NetworkAction;
 import com.farao_community.farao.ra_optimisation.RaoComputationResult;
 import com.powsybl.iidm.network.Network;
-import sun.nio.ch.Net;
 
 import java.util.List;
 import java.util.UUID;
@@ -26,12 +26,12 @@ import java.util.stream.Collectors;
 class Leaf {
 
     /**
-     * Parent Leaf or null for initial Leaf
+     * Parent Leaf (or null for initial/root Leaf)
      */
     private final Leaf parentLeaf;
 
     /**
-     * Network Action which will be tested, can be null
+     * Network Action which will be tested (can be null)
      */
     private final NetworkAction networkAction;
 
@@ -41,14 +41,16 @@ class Leaf {
     private String networkVariant;
 
     /**
-     * Impact of the network action
+     * Impact of the network action, quantified with a Linear
+     * Range Action Optimisation and reported in a RaoComputationResult
      */
     private RaoComputationResult actionImpact;
 
     /**
-     * Status of the leaf's Network Action evaluation
+     * Status of the Leaf evaluation : Created, Running, Evaluated or
+     * Error
      */
-    Status status;
+    private Status status;
 
     enum Status {
         CREATED,
@@ -58,7 +60,7 @@ class Leaf {
     }
 
     /**
-     * Initial Leaf constructor
+     * Initial Leaf constructor, set parent Leaf and networkAction to null
      */
     Leaf() {
         this.parentLeaf = null;
@@ -67,7 +69,7 @@ class Leaf {
     }
 
     /**
-     * Leaf constructor
+     * Leaf constructor, set parentLeaf and networkAction
      */
     private Leaf(Leaf parentLeaf, NetworkAction networkAction) {
         this.parentLeaf = parentLeaf;
@@ -75,37 +77,22 @@ class Leaf {
         this.status = Status.CREATED;
     }
 
-    /**
-     * Parent Leaf getter
-     */
     Leaf getParent() {
         return parentLeaf;
     }
 
-    /**
-     * Action impact getter
-     */
     RaoComputationResult getActionImpact() {
         return actionImpact;
     }
 
-    /**
-     * Leaf status getter
-     */
     Status getStatus() {
         return status;
     }
 
-    /**
-     * Leaf Variant getter
-     */
     String getNetworkVariant() {
         return networkVariant;
     }
 
-    /**
-     * Is this Leaf the initial one of the tree
-     */
     boolean isRoot() {
         return parentLeaf == null;
     }
@@ -119,29 +106,27 @@ class Leaf {
     }
 
     /**
-     * Evaluate the impact of Network Actions (from the current Leaf and
-     * its parents)
+     * Evaluate the Leaf : test the NetworkActions (from the Leaf and its
+     * parents) and report the results in actionImpact
      */
-    void evaluate(Network network) {
+    void evaluate(Network network, Crac crac) {
         if (isRoot()) {
             throw new FaraoException("When evaluating the root leaf, a network variant must be specified.");
         }
-        evaluate(network, getParent().getNetworkVariant());
+        evaluate(network, getParent().getNetworkVariant(), crac);
     }
 
-    /**
-     * Evaluate the impact of Network Actions (from the current Leaf and
-     * its parents)
-     */
-    void evaluate(Network network, String referenceNetworkVariant) {
+    void evaluate(Network network, String referenceNetworkVariant, Crac crac) {
 
         this.status = Status.EVALUATION_RUNNING;
 
         // get network variant and apply network action
         this.networkVariant = createVariant(network, referenceNetworkVariant);
         network.getVariantManager().setWorkingVariant(this.networkVariant);
+        applyAction(network);
 
-        //todo : run RangeActionRao and update RaoComputationResult
+        //todo : run LinearRangeActionOptimisation and store RaoComputationResult
+        this.status = Status.EVALUATED;
     }
 
     private String getUniqueVariantId(Network network) {
@@ -161,8 +146,13 @@ class Leaf {
         } else {
             network.getVariantManager().cloneVariant(referenceNetworkVariant, this.networkVariant);
         }
-
         return uniqueId;
+    }
+
+    private void applyAction(Network network) {
+        if (this.networkAction != null) {
+            networkAction.apply(network);
+        }
     }
 
 }
