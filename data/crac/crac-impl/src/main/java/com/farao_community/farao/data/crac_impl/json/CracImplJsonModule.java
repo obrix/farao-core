@@ -7,6 +7,8 @@
 package com.farao_community.farao.data.crac_impl.json;
 
 import com.farao_community.farao.data.crac_api.NetworkAction;
+import com.farao_community.farao.data.crac_impl.ComplexContingency;
+import com.farao_community.farao.data.crac_impl.json.serializers.ComplexContingencySerializer;
 import com.farao_community.farao.data.crac_impl.json.serializers.network_action.ComplexNetworkActionSerializer;
 import com.farao_community.farao.data.crac_impl.json.serializers.network_action.NetworkActionSerializer;
 import com.farao_community.farao.data.crac_impl.json.serializers.network_action.PstSetPointSerializer;
@@ -31,6 +33,7 @@ public class CracImplJsonModule extends SimpleModule {
 
     public CracImplJsonModule() {
         super();
+        this.addSerializer(ComplexContingency.class, new ComplexContingencySerializer());
         this.addSerializer(FreeToUse.class, new FreeToUseSerializer());
         this.addSerializer(OnConstraint.class, new OnConstraintSerializer());
         this.addSerializer(OnContingency.class, new OnContingencySerializer());
