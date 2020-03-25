@@ -22,10 +22,7 @@ import com.powsybl.commons.extensions.Extension;
 import com.powsybl.commons.json.JsonUtil;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static com.farao_community.farao.data.crac_impl.json.deserializers.DeserializerNames.*;
 
@@ -80,62 +77,18 @@ final class NetworkActionDeserializer {
     private static Topology deserializeTopology(JsonParser jsonParser, SimpleCrac simpleCrac, DeserializationContext deserializationContext) throws IOException {
         // cannot be done in a standard Topology deserializer as it requires the simpleCrac to compare
         // the networkElement ids of the Topology with the NetworkElements of the Crac
+        Map<String, Object> map = jsonToMap(jsonParser, simpleCrac, deserializationContext);
 
-        String id = null;
-        String name = null;
-        String operator = null;
-        List<UsageRule> usageRules = new ArrayList<>();
-        String networkElementId = null;
-        ActionType actionType = null;
-        List <Extension< NetworkAction >> extensions = null;
-
-        while (!jsonParser.nextToken().isStructEnd()) {
-
-            switch (jsonParser.getCurrentName()) {
-
-                case ID:
-                    id = jsonParser.nextTextValue();
-                    break;
-
-                case NAME:
-                    name = jsonParser.nextTextValue();
-                    break;
-
-                case OPERATOR:
-                    operator = jsonParser.nextTextValue();
-                    break;
-
-                case USAGE_RULES:
-                    jsonParser.nextToken();
-                    usageRules = UsageRuleDeserializer.deserialize(jsonParser, simpleCrac);
-                    break;
-
-                case NETWORK_ELEMENT:
-                    networkElementId = jsonParser.nextTextValue();
-                    break;
-
-                case NETWORK_ELEMENTS:
-                    jsonParser.nextToken();
-                    List<String> networkElementsIds = jsonParser.readValueAs(new TypeReference<ArrayList<String>>() {
-                    });
-                    networkElementId = networkElementsIds.get(0);
-                    break;
-
-                case ACTION_TYPE:
-                    jsonParser.nextToken();
-                    actionType = jsonParser.readValueAs(ActionType.class);
-                    break;
-
-                case EXTENSIONS:
-                    jsonParser.nextToken();
-                    jsonParser.nextToken();
-                    extensions = JsonUtil.readExtensions(jsonParser, deserializationContext, ExtensionsHandler.getExtensionsSerializers());
-                    break;
-
-                default:
-                    throw new FaraoException(UNEXPECTED_FIELD + jsonParser.getCurrentName());
-            }
+        String id = (String) map.get("id");
+        String name = (String) map.get("name");
+        String operator = (String) map.get("operator");
+        List<UsageRule> usageRules = (List<UsageRule>) map.get("usageRules");
+        if (usageRules == null) {
+            usageRules = new ArrayList<>();
         }
+        String networkElementId = (String) map.get("networkElementId");
+        ActionType actionType = (ActionType) map.get("actionType");
+        List <Extension< NetworkAction >> extensions = (List<Extension<NetworkAction>>) map.get("extensions");
 
         NetworkElement ne = simpleCrac.getNetworkElement(networkElementId);
         if (ne == null) {
@@ -152,58 +105,18 @@ final class NetworkActionDeserializer {
     private static PstSetpoint deserializePstSetPoint(JsonParser jsonParser, SimpleCrac simpleCrac, DeserializationContext deserializationContext) throws IOException {
         // cannot be done in a standard PstSetPoint deserializer as it requires the simpleCrac to compare
         // the networkElement ids of the PstSetPoint with the NetworkElements of the Crac
+        Map<String, Object> map = jsonToMap(jsonParser, simpleCrac, deserializationContext);
 
-        String id = null;
-        String name = null;
-        String operator = null;
-        List<UsageRule> usageRules = new ArrayList<>();
-        String networkElementId = null;
-        double setPoint = 0;
-        List <Extension< NetworkAction >> extensions = null;
-
-        while (!jsonParser.nextToken().isStructEnd()) {
-
-            switch (jsonParser.getCurrentName()) {
-
-                case USAGE_RULES:
-                    jsonParser.nextToken();
-                    usageRules = UsageRuleDeserializer.deserialize(jsonParser, simpleCrac);
-                    break;
-
-                case ID:
-                    id = jsonParser.nextTextValue();
-                    break;
-
-                case SETPOINT:
-                    jsonParser.nextToken();
-                    setPoint = jsonParser.getDoubleValue();
-                    break;
-
-                case OPERATOR:
-                    operator = jsonParser.nextTextValue();
-                    break;
-
-                case NAME:
-                    name = jsonParser.nextTextValue();
-                    break;
-
-                case NETWORK_ELEMENTS:
-                    jsonParser.nextToken();
-                    List<String> networkElementsIds = jsonParser.readValueAs(new TypeReference<ArrayList<String>>() {
-                    });
-                    networkElementId = networkElementsIds.get(0);
-                    break;
-
-                case EXTENSIONS:
-                    jsonParser.nextToken();
-                    jsonParser.nextToken();
-                    extensions = JsonUtil.readExtensions(jsonParser, deserializationContext, ExtensionsHandler.getExtensionsSerializers());
-                    break;
-
-                default:
-                    throw new FaraoException(UNEXPECTED_FIELD + jsonParser.getCurrentName());
-            }
+        String id = (String) map.get("id");
+        String name = (String) map.get("name");
+        String operator = (String) map.get("operator");
+        List<UsageRule> usageRules = (List<UsageRule>) map.get("usageRules");
+        if (usageRules == null) {
+            usageRules = new ArrayList<>();
         }
+        String networkElementId = (String) map.get("networkElementId");
+        double setPoint = (double) map.get("setPoint");
+        List <Extension< NetworkAction >> extensions = (List<Extension<NetworkAction>>) map.get("extensions");
 
         NetworkElement ne = simpleCrac.getNetworkElement(networkElementId);
         if (ne == null) {
@@ -220,16 +133,58 @@ final class NetworkActionDeserializer {
     private static ComplexNetworkAction deserializeComplexNetworkAction(JsonParser jsonParser, SimpleCrac simpleCrac, DeserializationContext deserializationContext) throws IOException {
         // cannot be done in a standard ComplexNetworkAction deserializer as it requires the simpleCrac to compare
         // the networkElement ids of the ComplexNetworkAction with the NetworkElements of the SimpleCrac
+        Map<String, Object> map = jsonToMap(jsonParser, simpleCrac, deserializationContext);
 
-        String id = null;
-        String name = null;
-        String operator = null;
-        List<UsageRule> usageRules = new ArrayList<>();
+        String id = (String) map.get("id");
+        String name = (String) map.get("name");
+        String operator = (String) map.get("operator");
+        List<UsageRule> usageRules = (List<UsageRule>) map.get("usageRules");
+        if (usageRules == null) {
+            usageRules = new ArrayList<>();
+        }
+        Set<AbstractElementaryNetworkAction> elementaryNetworkActions = (Set<AbstractElementaryNetworkAction>) map.get("elementaryNetworkActions");
+        return new ComplexNetworkAction(id, name, operator, usageRules, elementaryNetworkActions);
+    }
+
+    private static Map<String, Object> jsonToMap(JsonParser jsonParser, SimpleCrac simpleCrac, DeserializationContext deserializationContext) throws IOException {
+        Map<String, Object> map = new HashMap<>();
+
         Set<AbstractElementaryNetworkAction> elementaryNetworkActions = new HashSet<>();
-
         while (!jsonParser.nextToken().isStructEnd()) {
 
             switch (jsonParser.getCurrentName()) {
+                case ID:
+                    map.put("id", jsonParser.nextTextValue());
+                    break;
+
+                case NAME:
+                    map.put("name", jsonParser.nextTextValue());
+                    break;
+
+                case OPERATOR:
+                    map.put("operator", jsonParser.nextTextValue());
+                    break;
+
+                case USAGE_RULES:
+                    jsonParser.nextToken();
+                    map.put("usageRules", UsageRuleDeserializer.deserialize(jsonParser, simpleCrac));
+                    break;
+
+                case SETPOINT:
+                    jsonParser.nextToken();
+                    map.put("setPoint", jsonParser.getDoubleValue());
+                    break;
+
+                case NETWORK_ELEMENT:
+                    map.put("networkElementId", jsonParser.nextTextValue());
+                    break;
+
+                case NETWORK_ELEMENTS:
+                    jsonParser.nextToken();
+                    List<String> networkElementsIds = jsonParser.readValueAs(new TypeReference<ArrayList<String>>() {
+                    });
+                    map.put("networkElementId", networkElementsIds.get(0));
+                    break;
 
                 case ELEMENTARY_NETWORK_ACTIONS:
                     jsonParser.nextToken();
@@ -242,28 +197,22 @@ final class NetworkActionDeserializer {
                     });
                     break;
 
-                case OPERATOR:
-                    operator = jsonParser.nextTextValue();
-                    break;
-
-                case ID:
-                    id = jsonParser.nextTextValue();
-                    break;
-
-                case USAGE_RULES:
+                case ACTION_TYPE:
                     jsonParser.nextToken();
-                    usageRules = UsageRuleDeserializer.deserialize(jsonParser, simpleCrac);
+                    map.put("actionType", jsonParser.readValueAs(ActionType.class));
                     break;
 
-                case NAME:
-                    name = jsonParser.nextTextValue();
+                case EXTENSIONS:
+                    jsonParser.nextToken();
+                    jsonParser.nextToken();
+                    map.put("extensions", JsonUtil.readExtensions(jsonParser, deserializationContext, ExtensionsHandler.getExtensionsSerializers()));
                     break;
 
                 default:
                     throw new FaraoException(UNEXPECTED_FIELD + jsonParser.getCurrentName());
             }
         }
-
-        return new ComplexNetworkAction(id, name, operator, usageRules, elementaryNetworkActions);
+        map.put("elementaryNetworkActions", elementaryNetworkActions);
+        return map;
     }
 }
