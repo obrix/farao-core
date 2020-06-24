@@ -93,4 +93,11 @@ public class ComplexContingency extends AbstractIdentifiable implements Continge
     public int hashCode() {
         return super.hashCode();
     }
+
+    @Override
+    public void removeNetworkElement(NetworkElement networkElement) {
+        if (networkElements.contains(networkElement)) {
+            networkElements.remove(networkElement);
+        }
+    }
 }

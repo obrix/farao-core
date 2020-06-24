@@ -49,11 +49,11 @@ public final class SensitivityComputationService {
             init(ComponentDefaultConfig.load().newFactoryImpl(SensitivityComputationFactory.class), computationManager);
         }
         SensitivityComputation computation = sensitivityComputationFactory.create(network, computationManager, 1);
-        LOGGER.debug("Sensitivity computation [start]");
+        LOGGER.info("Sensitivity computation [start]");
         CompletableFuture<SensitivityComputationResults> results = computation.run(factorsProvider, contingenciesProvider, workingStateId, sensitivityComputationParameters);
         try {
             SensitivityComputationResults joinedResults = results.join();
-            LOGGER.debug("Sensitivity computation [end]");
+            LOGGER.info("Sensitivity computation [end]");
             return joinedResults;
         } catch (CompletionException e) {
             throw new FaraoException("Sensitivity computation failed");

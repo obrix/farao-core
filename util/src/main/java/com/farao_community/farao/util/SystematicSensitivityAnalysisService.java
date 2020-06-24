@@ -33,9 +33,9 @@ public final class SystematicSensitivityAnalysisService {
                                                                   SensitivityComputationParameters sensitivityComputationParameters) {
         SensitivityComputationResults allStatesSensi = runSensitivityComputation(network, crac, computationManager, sensitivityComputationParameters);
 
-        LOGGER.debug("Filling systematic analysis results [start]");
+        LOGGER.info("Filling systematic analysis results [start]");
         SystematicSensitivityAnalysisResult results = new SystematicSensitivityAnalysisResult(allStatesSensi);
-        LOGGER.debug("Filling systematic analysis results [end]");
+        LOGGER.info("Filling systematic analysis results [end]");
         return results;
     }
 
@@ -54,4 +54,5 @@ public final class SystematicSensitivityAnalysisService {
         }
 
     }
+
 }

@@ -73,12 +73,19 @@ public final class RaoInput {
         // remove Contingencies whose NetworkElement is absent from the network
         ArrayList<Contingency> absentFromNetworkContingencies = new ArrayList<>();
         for (Contingency contingency : crac.getContingencies()) {
-            contingency.getNetworkElements().forEach(networkElement -> {
+            ArrayList<NetworkElement> absentFromNetworkNetworkElements = new ArrayList<>();
+            for (NetworkElement networkElement : contingency.getNetworkElements()) {
                 if (network.getIdentifiable(networkElement.getId()) == null) {
-                    absentFromNetworkContingencies.add(contingency);
+                    absentFromNetworkNetworkElements.add(networkElement);
                     report.add(String.format("[REMOVED] Contingency %s with network element [%s] is not present in the network. It is removed from the Crac", contingency.getId(), networkElement.getId()));
                 }
-            });
+            }
+            for (NetworkElement networkElement : absentFromNetworkNetworkElements) {
+                contingency.removeNetworkElement(networkElement);
+            }
+            if (contingency.getNetworkElements().isEmpty()) {
+                absentFromNetworkContingencies.add(contingency);
+            }
         }
 
         absentFromNetworkContingencies.forEach(contingency ->  {

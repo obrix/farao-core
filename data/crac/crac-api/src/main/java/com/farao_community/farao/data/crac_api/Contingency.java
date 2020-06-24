@@ -35,4 +35,6 @@ public interface Contingency extends Identifiable {
      * @param computationManager computation manager
      */
     void apply(Network network, ComputationManager computationManager);
+
+    void removeNetworkElement(NetworkElement networkElement);
 }
