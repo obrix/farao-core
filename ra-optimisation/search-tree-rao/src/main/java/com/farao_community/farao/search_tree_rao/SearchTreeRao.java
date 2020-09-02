@@ -22,6 +22,7 @@ import org.apache.commons.lang3.NotImplementedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
@@ -233,6 +234,10 @@ public class SearchTreeRao implements RaoProvider {
         RaoResult raoResult = new RaoResult(optimalLeaf.getStatus().equals(Leaf.Status.ERROR) ? RaoResult.Status.FAILURE : RaoResult.Status.SUCCESS);
         raoResult.setPreOptimVariantId(rootLeaf.getInitialVariantId());
         raoResult.setPostOptimVariantId(optimalLeaf.getBestVariantId());
+        if (raoResult.isSuccessful()) {
+            raoResult.setOptimizedNetwork(optimalLeaf.getRaoData().getNetwork()); // todo ?
+            raoResult.setNetworkActionsAppliedOnOptimizedNetwork(new ArrayList<>(optimalLeaf.getNetworkActions()));
+        }
         return raoResult;
     }
 }

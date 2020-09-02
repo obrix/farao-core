@@ -7,10 +7,14 @@
 
 package com.farao_community.farao.rao_api;
 
+import com.farao_community.farao.data.crac_api.NetworkAction;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.powsybl.commons.extensions.AbstractExtendable;
+import com.powsybl.iidm.network.Network;
+
+import java.util.List;
 
 /**
  * RAO result API. This class will contain information about the RAO computation (computation status, logs, etc).
@@ -31,6 +35,10 @@ public class RaoResult extends AbstractExtendable<RaoResult> {
     private String preOptimVariantId;
 
     private String postOptimVariantId;
+
+    private Network optimizedNetwork;
+
+    private List<NetworkAction> networkActionsAppliedOnOptimizedNetwork;
 
     @JsonCreator
     public RaoResult(@JsonProperty("status") Status status) {
@@ -64,5 +72,21 @@ public class RaoResult extends AbstractExtendable<RaoResult> {
 
     public String getPostOptimVariantId() {
         return postOptimVariantId;
+    }
+
+    public Network getOptimizedNetwork() {
+        return optimizedNetwork;
+    }
+
+    public void setOptimizedNetwork(Network optimizedNetwork) {
+        this.optimizedNetwork = optimizedNetwork;
+    }
+
+    public List<NetworkAction> getNetworkActionsAppliedOnOptimizedNetwork() {
+        return networkActionsAppliedOnOptimizedNetwork;
+    }
+
+    public void setNetworkActionsAppliedOnOptimizedNetwork(List<NetworkAction> networkActionsAppliedOnOptimizedNetwork) {
+        this.networkActionsAppliedOnOptimizedNetwork = networkActionsAppliedOnOptimizedNetwork;
     }
 }
