@@ -11,7 +11,7 @@ import com.farao_community.farao.commons.FaraoException;
 import com.farao_community.farao.data.crac_api.AbstractIdentifiable;
 import com.farao_community.farao.data.crac_api.Contingency;
 import com.farao_community.farao.data.crac_api.NetworkElement;
-import com.farao_community.farao.data.crac_impl.json.serializers.ComplexContingencySerializer;
+import com.farao_community.farao.data.crac_api.json.serializers.ContingencySerializer;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.powsybl.computation.ComputationManager;
@@ -26,7 +26,7 @@ import java.util.*;
  * @author Viktor Terrier {@literal <viktor.terrier at rte-france.com>}
  */
 @JsonTypeName("complex-contingency")
-@JsonSerialize(using = ComplexContingencySerializer.class)
+@JsonSerialize(using = ContingencySerializer.class)
 public class ComplexContingency extends AbstractIdentifiable<Contingency> implements Contingency {
 
     private Set<NetworkElement> networkElements;

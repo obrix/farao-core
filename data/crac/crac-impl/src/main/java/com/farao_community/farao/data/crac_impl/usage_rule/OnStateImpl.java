@@ -10,7 +10,7 @@ package com.farao_community.farao.data.crac_impl.usage_rule;
 import com.farao_community.farao.data.crac_api.State;
 import com.farao_community.farao.data.crac_api.usage_rule.OnState;
 import com.farao_community.farao.data.crac_api.usage_rule.UsageMethod;
-import com.farao_community.farao.data.crac_impl.json.serializers.usage_rule.OnStateSerializer;
+import com.farao_community.farao.data.crac_api.json.serializers.usage_rule.OnStateSerializer;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 

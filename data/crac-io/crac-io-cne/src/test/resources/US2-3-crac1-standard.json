@@ -27,7 +27,7 @@
     "name" : "Threshold12",
     "networkElement" : "FFR1AA1  FFR2AA1  1",
     "instant" : "preventive",
-    "frm" : 0.0,
+    "reliability-margin" : 0.0,
     "thresholds" : [ {
       "type" : "branch-threshold",
       "min" : -0.95,

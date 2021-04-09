@@ -21,8 +21,8 @@ import org.apache.commons.lang3.NotImplementedException;
 @JsonTypeName("injection-setpoint")
 public final class InjectionSetpointImpl implements InjectionSetpoint {
 
-    private NetworkElement networkElement;
-    private double setpoint;
+    private final NetworkElement networkElement;
+    private final double setpoint;
 
     public InjectionSetpointImpl(NetworkElement networkElement, double setpoint) {
         this.networkElement = networkElement;

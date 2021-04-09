@@ -6,19 +6,18 @@
  */
 package com.farao_community.farao.data.crac_impl.json;
 
+import com.farao_community.farao.data.crac_api.json.serializers.*;
+
 import com.farao_community.farao.data.crac_impl.ComplexContingency;
 import com.farao_community.farao.data.crac_impl.SimpleCrac;
 import com.farao_community.farao.data.crac_impl.cnec.FlowCnecImpl;
-import com.farao_community.farao.data.crac_impl.json.serializers.ComplexContingencySerializer;
-import com.farao_community.farao.data.crac_impl.json.serializers.FlowCnecImplSerializer;
-import com.farao_community.farao.data.crac_impl.json.serializers.SimpleCracSerializer;
-import com.farao_community.farao.data.crac_impl.json.serializers.network_action.InjectionSetPointSerializer;
-import com.farao_community.farao.data.crac_impl.json.serializers.network_action.NetworkActionImplSerializer;
-import com.farao_community.farao.data.crac_impl.json.serializers.network_action.PstSetPointSerializer;
-import com.farao_community.farao.data.crac_impl.json.serializers.network_action.TopologySerializer;
-import com.farao_community.farao.data.crac_impl.json.serializers.range_action.PstRangeActionImplSerializer;
-import com.farao_community.farao.data.crac_impl.json.serializers.usage_rule.FreeToUseSerializer;
-import com.farao_community.farao.data.crac_impl.json.serializers.usage_rule.OnStateSerializer;
+import com.farao_community.farao.data.crac_api.json.serializers.network_action.InjectionSetPointSerializer;
+import com.farao_community.farao.data.crac_api.json.serializers.network_action.NetworkActionSerializer;
+import com.farao_community.farao.data.crac_api.json.serializers.network_action.PstSetPointSerializer;
+import com.farao_community.farao.data.crac_api.json.serializers.network_action.TopologySerializer;
+import com.farao_community.farao.data.crac_api.json.serializers.range_action.RangeActionSerializer;
+import com.farao_community.farao.data.crac_api.json.serializers.usage_rule.FreeToUseSerializer;
+import com.farao_community.farao.data.crac_api.json.serializers.usage_rule.OnStateSerializer;
 import com.farao_community.farao.data.crac_impl.remedial_action.network_action.*;
 import com.farao_community.farao.data.crac_impl.remedial_action.range_action.PstRangeActionImpl;
 import com.farao_community.farao.data.crac_impl.usage_rule.FreeToUseImpl;
@@ -32,16 +31,16 @@ public class CracImplJsonModule extends SimpleModule {
 
     public CracImplJsonModule() {
         super();
-        this.addSerializer(ComplexContingency.class, new ComplexContingencySerializer());
+        this.addSerializer(ComplexContingency.class, new ContingencySerializer());
         this.addSerializer(FreeToUseImpl.class, new FreeToUseSerializer());
         this.addSerializer(OnStateImpl.class, new OnStateSerializer());
-        this.addSerializer(NetworkActionImpl.class, new NetworkActionImplSerializer());
+        this.addSerializer(NetworkActionImpl.class, new NetworkActionSerializer());
         this.addSerializer(PstSetpointImpl.class, new PstSetPointSerializer());
         this.addSerializer(InjectionSetpointImpl.class, new InjectionSetPointSerializer());
         this.addSerializer(TopologicalActionImpl.class, new TopologySerializer());
         this.addSerializer(PstSetpointImpl.class, new PstSetPointSerializer());
-        this.addSerializer(PstRangeActionImpl.class, new PstRangeActionImplSerializer());
-        this.addSerializer(SimpleCrac.class, new SimpleCracSerializer());
-        this.addSerializer(FlowCnecImpl.class, new FlowCnecImplSerializer());
+        this.addSerializer(PstRangeActionImpl.class, new RangeActionSerializer<>());
+        this.addSerializer(SimpleCrac.class, new CracSerializer());
+        this.addSerializer(FlowCnecImpl.class, new BranchCnecSerializer<FlowCnecImpl>());
     }
 }

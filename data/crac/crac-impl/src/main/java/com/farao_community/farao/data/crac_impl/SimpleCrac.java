@@ -19,7 +19,7 @@ import com.farao_community.farao.data.crac_api.cnec.adder.BranchCnecAdder;
 import com.farao_community.farao.data.crac_api.threshold.BranchThreshold;
 import com.farao_community.farao.data.crac_impl.cnec.FlowCnecImpl;
 import com.farao_community.farao.data.crac_impl.cnec.adder.FlowCnecAdderImpl;
-import com.farao_community.farao.data.crac_impl.json.serializers.FlowCnecImplSerializer;
+import com.farao_community.farao.data.crac_api.json.serializers.BranchCnecSerializer;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.powsybl.iidm.network.Network;
@@ -282,7 +282,7 @@ public class SimpleCrac extends AbstractIdentifiable<Crac> implements Crac {
         return branchCnecs.get(id);
     }
 
-    @JsonSerialize(contentUsing = FlowCnecImplSerializer.class)
+    @JsonSerialize(contentUsing = BranchCnecSerializer.class)
     @Override
     public Set<BranchCnec> getBranchCnecs() {
         return new HashSet<>(branchCnecs.values());

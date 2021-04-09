@@ -25,8 +25,8 @@ import org.apache.commons.lang3.NotImplementedException;
 @JsonTypeName("topological-action")
 public final class TopologicalActionImpl implements TopologicalAction {
 
-    private NetworkElement networkElement;
-    private ActionType actionType;
+    private final NetworkElement networkElement;
+    private final ActionType actionType;
 
     public TopologicalActionImpl(NetworkElement networkElement, ActionType actionType) {
         this.networkElement = networkElement;
@@ -39,9 +39,9 @@ public final class TopologicalActionImpl implements TopologicalAction {
 
     @Override
     public void apply(Network network) {
-        Identifiable element = network.getIdentifiable(networkElement.getId());
+        Identifiable<?> element = network.getIdentifiable(networkElement.getId());
         if (element instanceof Branch) {
-            Branch branch = (Branch) element;
+            Branch<?> branch = (Branch<?>) element;
             if (actionType == ActionType.OPEN) {
                 branch.getTerminal1().disconnect();
                 branch.getTerminal2().disconnect();

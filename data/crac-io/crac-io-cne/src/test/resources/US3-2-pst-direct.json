@@ -33,7 +33,7 @@
     "networkElement" : "FFR2AA1  DDE3AA1  1",
     "contingency" : "Contingency FR1 FR3",
     "instant" : "curative",
-    "frm" : 0.0,
+    "reliability-margin" : 0.0,
     "thresholds" : [ {
       "type" : "branch-threshold",
       "unit" : "A",
@@ -74,7 +74,7 @@
     "networkElement" : "DDE1AA1  DDE2AA1  1",
     "contingency" : "Contingency FR1 FR3",
     "instant" : "outage",
-    "frm" : -1.0,
+    "reliability-margin" : -1.0,
     "thresholds" : [ {
       "type" : "branch-threshold",
       "unit" : "A",
@@ -115,7 +115,7 @@
     "networkElement" : "DDE1AA1  DDE2AA1  1",
     "contingency" : "Contingency FR1 FR3",
     "instant" : "curative",
-    "frm" : 2.0,
+    "reliability-margin" : 2.0,
     "thresholds" : [ {
       "type" : "branch-threshold",
       "unit" : "A",
@@ -155,7 +155,7 @@
     "name" : "Line DE1 DE2",
     "networkElement" : "DDE1AA1  DDE2AA1  1",
     "instant" : "preventive",
-    "frm" : 3.0,
+    "reliability-margin" : 3.0,
     "thresholds" : [ {
       "type" : "branch-threshold",
       "unit" : "A",
@@ -196,7 +196,7 @@
     "networkElement" : "FFR2AA1  DDE3AA1  1",
     "contingency" : "Contingency FR1 FR3",
     "instant" : "outage",
-    "frm" : 4.0,
+    "reliability-margin" : 4.0,
     "thresholds" : [ {
       "type" : "branch-threshold",
       "unit" : "A",
@@ -236,7 +236,7 @@
     "name" : "Tie-line FR DE",
     "networkElement" : "FFR2AA1  DDE3AA1  1",
     "instant" : "preventive",
-    "frm" : 5.0,
+    "reliability-margin" : 5.0,
     "thresholds" : [ {
       "type" : "branch-threshold",
       "unit" : "A",

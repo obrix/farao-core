@@ -5,7 +5,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-package com.farao_community.farao.data.crac_impl.json.serializers.usage_rule;
+package com.farao_community.farao.data.crac_api.json.serializers.usage_rule;
 
 import com.farao_community.farao.data.crac_api.usage_rule.UsageRule;
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -17,7 +17,7 @@ import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
 
 import java.io.IOException;
 
-import static com.farao_community.farao.data.crac_impl.json.JsonSerializationNames.*;
+import static com.farao_community.farao.data.crac_api.json.JsonSerializationNames.*;
 
 /**
  * @author Joris Mancini {@literal <joris.mancini at rte-france.com>}

@@ -28,7 +28,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static com.farao_community.farao.data.crac_impl.json.JsonSerializationNames.*;
+import static com.farao_community.farao.data.crac_api.json.JsonSerializationNames.*;
 import static java.lang.String.format;
 
 /**
@@ -90,7 +90,7 @@ final class CnecDeserializer {
                         instant = jsonParser.readValueAs(Instant.class);
                         break;
 
-                    case FRM:
+                    case RM:
                         jsonParser.nextToken();
                         frm = jsonParser.getDoubleValue();
                         break;

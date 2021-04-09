@@ -6,10 +6,9 @@
  *
  */
 
-package com.farao_community.farao.data.crac_impl.json.serializers;
+package com.farao_community.farao.data.crac_api.json.serializers;
 
 import com.farao_community.farao.data.crac_api.*;
-import com.farao_community.farao.data.crac_impl.ComplexContingency;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.core.type.WritableTypeId;
@@ -19,14 +18,14 @@ import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
 
 import java.io.IOException;
 
-import static com.farao_community.farao.data.crac_impl.json.JsonSerializationNames.*;
+import static com.farao_community.farao.data.crac_api.json.JsonSerializationNames.*;
 
 /**
  * @author Philippe Edwards {@literal <philippe.edwards at rte-france.com>}
  */
-public class ComplexContingencySerializer extends JsonSerializer<ComplexContingency> {
+public class ContingencySerializer extends JsonSerializer<Contingency> {
     @Override
-    public void serialize(ComplexContingency value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+    public void serialize(Contingency value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
         gen.writeStringField(ID, value.getId());
         gen.writeStringField(NAME, value.getName());
         gen.writeArrayFieldStart(NETWORK_ELEMENTS);
@@ -37,7 +36,7 @@ public class ComplexContingencySerializer extends JsonSerializer<ComplexContinge
     }
 
     @Override
-    public void serializeWithType(ComplexContingency contingency, JsonGenerator jsonGenerator, SerializerProvider serializerProvider, TypeSerializer typeSerializer) throws IOException {
+    public void serializeWithType(Contingency contingency, JsonGenerator jsonGenerator, SerializerProvider serializerProvider, TypeSerializer typeSerializer) throws IOException {
         WritableTypeId writableTypeId = typeSerializer.typeId(contingency, JsonToken.START_OBJECT);
         typeSerializer.writeTypePrefix(jsonGenerator, writableTypeId);
         serialize(contingency, jsonGenerator, serializerProvider);

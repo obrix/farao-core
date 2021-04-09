@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.farao_community.farao.data.crac_impl.json.JsonSerializationNames.*;
+import static com.farao_community.farao.data.crac_api.json.JsonSerializationNames.*;
 import static java.lang.String.format;
 
 /**

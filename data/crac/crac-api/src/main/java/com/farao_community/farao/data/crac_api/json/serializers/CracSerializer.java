@@ -6,11 +6,10 @@
  *
  */
 
-package com.farao_community.farao.data.crac_impl.json.serializers;
+package com.farao_community.farao.data.crac_api.json.serializers;
 
 import com.farao_community.farao.data.crac_api.*;
 import com.farao_community.farao.data.crac_api.cnec.BranchCnec;
-import com.farao_community.farao.data.crac_impl.SimpleCrac;
 import com.farao_community.farao.data.crac_api.ExtensionsHandler;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonToken;
@@ -25,14 +24,14 @@ import java.text.SimpleDateFormat;
 import java.time.ZoneOffset;
 import java.util.TimeZone;
 
-import static com.farao_community.farao.data.crac_impl.json.JsonSerializationNames.*;
+import static com.farao_community.farao.data.crac_api.json.JsonSerializationNames.*;
 
 /**
  * @author Alexandre Montigny {@literal <alexandre.montigny at rte-france.com>}
  */
-public class SimpleCracSerializer extends JsonSerializer<SimpleCrac> {
+public class CracSerializer extends JsonSerializer<Crac> {
     @Override
-    public void serialize(SimpleCrac value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+    public void serialize(Crac value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
         gen.writeStringField(ID, value.getId());
         gen.writeStringField(NAME, value.getName());
         if (value.getNetworkDate() != null) {
@@ -70,7 +69,7 @@ public class SimpleCracSerializer extends JsonSerializer<SimpleCrac> {
     }
 
     @Override
-    public void serializeWithType(SimpleCrac value, JsonGenerator gen, SerializerProvider serializers, TypeSerializer typeSer) throws IOException {
+    public void serializeWithType(Crac value, JsonGenerator gen, SerializerProvider serializers, TypeSerializer typeSer) throws IOException {
         WritableTypeId writableTypeId = typeSer.typeId(value, JsonToken.START_OBJECT);
         typeSer.writeTypePrefix(gen, writableTypeId);
         serialize(value, gen, serializers);

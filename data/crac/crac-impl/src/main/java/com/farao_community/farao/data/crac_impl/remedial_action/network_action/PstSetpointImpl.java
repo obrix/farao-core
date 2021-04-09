@@ -26,9 +26,9 @@ import static com.farao_community.farao.data.crac_api.RangeDefinition.STARTS_AT_
 @JsonTypeName("pst-setpoint")
 public final class PstSetpointImpl implements PstSetpoint {
 
-    private NetworkElement networkElement;
-    private double setpoint;
-    private RangeDefinition rangeDefinition;
+    private final NetworkElement networkElement;
+    private final double setpoint;
+    private final RangeDefinition rangeDefinition;
 
     public PstSetpointImpl(NetworkElement networkElement, double setpoint, RangeDefinition rangeDefinition) {
         this.networkElement = networkElement;

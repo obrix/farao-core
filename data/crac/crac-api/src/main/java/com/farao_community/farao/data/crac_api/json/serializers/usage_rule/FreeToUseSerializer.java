@@ -5,10 +5,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-package com.farao_community.farao.data.crac_impl.json.serializers.usage_rule;
+package com.farao_community.farao.data.crac_api.json.serializers.usage_rule;
 
-import com.farao_community.farao.data.crac_impl.json.JsonSerializationNames;
-import com.farao_community.farao.data.crac_impl.usage_rule.FreeToUseImpl;
+import com.farao_community.farao.data.crac_api.usage_rule.FreeToUse;
+import com.farao_community.farao.data.crac_api.json.JsonSerializationNames;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
@@ -17,10 +17,10 @@ import java.io.IOException;
 /**
  * @author Joris Mancini {@literal <joris.mancini at rte-france.com>}
  */
-public class FreeToUseSerializer extends UsageRuleSerializer<FreeToUseImpl> {
+public class FreeToUseSerializer extends UsageRuleSerializer<FreeToUse> {
 
     @Override
-    public void serialize(FreeToUseImpl usageRule, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+    public void serialize(FreeToUse usageRule, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
         super.serialize(usageRule, jsonGenerator, serializerProvider);
         jsonGenerator.writeStringField(JsonSerializationNames.INSTANT, usageRule.getInstant().toString());
     }

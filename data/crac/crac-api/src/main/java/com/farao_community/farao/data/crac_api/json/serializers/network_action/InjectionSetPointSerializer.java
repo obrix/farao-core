@@ -4,9 +4,9 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
-package com.farao_community.farao.data.crac_impl.json.serializers.network_action;
+package com.farao_community.farao.data.crac_api.json.serializers.network_action;
 
-import com.farao_community.farao.data.crac_impl.remedial_action.network_action.InjectionSetpointImpl;
+import com.farao_community.farao.data.crac_api.InjectionSetpoint;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.core.type.WritableTypeId;
@@ -16,20 +16,20 @@ import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
 
 import java.io.IOException;
 
-import static com.farao_community.farao.data.crac_impl.json.JsonSerializationNames.*;
+import static com.farao_community.farao.data.crac_api.json.JsonSerializationNames.*;
 
 /**
  * @author Sebastien Murgey {@literal <sebastien.murgey at rte-france.com>}
  */
-public class InjectionSetPointSerializer extends JsonSerializer<InjectionSetpointImpl> {
+public class InjectionSetPointSerializer extends JsonSerializer<InjectionSetpoint> {
     @Override
-    public void serialize(InjectionSetpointImpl injectionSetPoint, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+    public void serialize(InjectionSetpoint injectionSetPoint, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
         jsonGenerator.writeObjectField(NETWORK_ELEMENT, injectionSetPoint.getNetworkElement().getId());
         jsonGenerator.writeNumberField(SETPOINT, injectionSetPoint.getSetpoint());
     }
 
     @Override
-    public void serializeWithType(InjectionSetpointImpl injectionSetPoint, JsonGenerator jsonGenerator, SerializerProvider serializerProvider, TypeSerializer typeSerializer) throws IOException {
+    public void serializeWithType(InjectionSetpoint injectionSetPoint, JsonGenerator jsonGenerator, SerializerProvider serializerProvider, TypeSerializer typeSerializer) throws IOException {
         WritableTypeId writableTypeId = typeSerializer.typeId(injectionSetPoint, JsonToken.START_OBJECT);
         typeSerializer.writeTypePrefix(jsonGenerator, writableTypeId);
         serialize(injectionSetPoint, jsonGenerator, serializerProvider);

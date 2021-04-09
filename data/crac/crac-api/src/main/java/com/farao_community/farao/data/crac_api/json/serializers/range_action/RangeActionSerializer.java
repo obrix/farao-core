@@ -5,14 +5,13 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-package com.farao_community.farao.data.crac_impl.json.serializers.range_action;
+package com.farao_community.farao.data.crac_api.json.serializers.range_action;
 
 import com.farao_community.farao.data.crac_api.ExtensionsHandler;
 import com.farao_community.farao.data.crac_api.Range;
 import com.farao_community.farao.data.crac_api.RangeAction;
-import com.farao_community.farao.data.crac_impl.json.JsonSerializationNames;
-import com.farao_community.farao.data.crac_impl.json.serializers.AbstractRemedialActionSerializer;
-import com.farao_community.farao.data.crac_impl.remedial_action.range_action.AbstractRangeAction;
+import com.farao_community.farao.data.crac_api.json.JsonSerializationNames;
+import com.farao_community.farao.data.crac_api.json.serializers.RemedialActionSerializer;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.core.type.WritableTypeId;
@@ -26,7 +25,7 @@ import java.util.Optional;
 /**
  * @author Joris Mancini {@literal <joris.mancini at rte-france.com>}
  */
-public class RangeActionSerializer<E extends AbstractRangeAction> extends AbstractRemedialActionSerializer<RangeAction, E> {
+public class RangeActionSerializer<E extends RangeAction> extends RemedialActionSerializer<E> {
 
     @Override
     public void serialize(E abstractRangeAction, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {

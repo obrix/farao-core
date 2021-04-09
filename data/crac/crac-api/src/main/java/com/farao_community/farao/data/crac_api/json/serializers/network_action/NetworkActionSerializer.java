@@ -5,14 +5,13 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-package com.farao_community.farao.data.crac_impl.json.serializers.network_action;
+package com.farao_community.farao.data.crac_api.json.serializers.network_action;
 
 import com.farao_community.farao.data.crac_api.ElementaryAction;
 import com.farao_community.farao.data.crac_api.ExtensionsHandler;
 import com.farao_community.farao.data.crac_api.NetworkAction;
-import com.farao_community.farao.data.crac_impl.json.JsonSerializationNames;
-import com.farao_community.farao.data.crac_impl.json.serializers.AbstractRemedialActionSerializer;
-import com.farao_community.farao.data.crac_impl.remedial_action.network_action.NetworkActionImpl;
+import com.farao_community.farao.data.crac_api.json.JsonSerializationNames;
+import com.farao_community.farao.data.crac_api.json.serializers.RemedialActionSerializer;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.powsybl.commons.json.JsonUtil;
@@ -22,10 +21,10 @@ import java.io.IOException;
 /**
  * @author Joris Mancini {@literal <joris.mancini at rte-france.com>}
  */
-public class NetworkActionImplSerializer extends AbstractRemedialActionSerializer<NetworkAction, NetworkActionImpl> {
+public class NetworkActionSerializer extends RemedialActionSerializer<NetworkAction> {
 
     @Override
-    public void serialize(NetworkActionImpl networkAction, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+    public void serialize(NetworkAction networkAction, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
         super.serializeCommon(networkAction, jsonGenerator);
         jsonGenerator.writeFieldName(JsonSerializationNames.ELEMENTARY_ACTIONS);
         jsonGenerator.writeStartArray();
