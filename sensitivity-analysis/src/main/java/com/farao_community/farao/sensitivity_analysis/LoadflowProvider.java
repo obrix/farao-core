@@ -140,15 +140,16 @@ public class LoadflowProvider extends AbstractSimpleSensitivityProvider {
     private List<SensitivityFunction> cnecToSensitivityFunctions(Network network, NetworkElement networkElement) {
         String id = networkElement.getId();
         String name = networkElement.getName();
+        String branchId = network.getIdentifiable(id).getId();
         Identifiable<?> networkIdentifiable = network.getIdentifiable(id);
 
         if (networkIdentifiable instanceof Branch) {
             List<SensitivityFunction> sensitivityFunctions = new ArrayList<>();
             if (factorsInMegawatt) {
-                sensitivityFunctions.add(new BranchFlow(id, name, id));
+                sensitivityFunctions.add(new BranchFlow(id, name, branchId));
             }
             if (factorsInAmpere) {
-                sensitivityFunctions.add(new BranchIntensity(id, name, id));
+                sensitivityFunctions.add(new BranchIntensity(id, name, branchId));
             }
             return sensitivityFunctions;
         } else {
