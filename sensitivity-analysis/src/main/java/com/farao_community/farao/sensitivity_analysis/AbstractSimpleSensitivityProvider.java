@@ -67,15 +67,15 @@ public abstract class AbstractSimpleSensitivityProvider implements CnecSensitivi
         String elementId = cracContingencyElement.getId();
         Identifiable<?> networkIdentifiable = network.getIdentifiable(elementId);
         if (networkIdentifiable instanceof Branch) {
-            return new BranchContingency(elementId);
+            return new BranchContingency(networkIdentifiable.getId());
         } else if (networkIdentifiable instanceof Generator) {
-            return new GeneratorContingency(elementId);
+            return new GeneratorContingency(networkIdentifiable.getId());
         } else if (networkIdentifiable instanceof HvdcLine) {
-            return new HvdcLineContingency(elementId);
+            return new HvdcLineContingency(networkIdentifiable.getId());
         } else if (networkIdentifiable instanceof BusbarSection) {
-            return new BusbarSectionContingency(elementId);
+            return new BusbarSectionContingency(networkIdentifiable.getId());
         } else if (networkIdentifiable instanceof DanglingLine) {
-            return new DanglingLineContingency(elementId);
+            return new DanglingLineContingency(networkIdentifiable.getId());
         } else {
             throw new SensitivityAnalysisException("Unable to apply contingency element " + elementId);
         }
