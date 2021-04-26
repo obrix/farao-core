@@ -107,7 +107,7 @@ public class CracCleaner {
                         report.add(String.format("[WARNING] Contingency %s has a network element [%s] of unhandled type [%s]. This may result in unexpected behavior.", contingency.getId(), networkElement.getId(), identifiable.getClass().toString()));
                     }
                     // do not delete contingencies now as they are needed to check which associated states/cnecs should be removed as well
-                } else if (identifiable instanceof Branch && !((Branch) identifiable).getTerminal1().isConnected() && !((Branch) identifiable).getTerminal2().isConnected()) {
+                } else if (identifiable instanceof Injection) {
                     removedContingencies.add(contingency);
                 }
             });
