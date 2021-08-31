@@ -17,10 +17,7 @@ import com.powsybl.sensitivity.factors.functions.BranchFlow;
 import com.powsybl.sensitivity.factors.functions.BranchIntensity;
 import com.powsybl.sensitivity.factors.variables.LinearGlsk;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author Pengbo Wang {@literal <pengbo.wang at rte-international.com>}
@@ -109,11 +106,14 @@ public class SystematicSensitivityResult {
 
         // TODO: remove this fix when reference function patched in case NaN and no divergence
         if (Double.isNaN(reference) && !Double.isNaN(sensitivity)) {
-            reference = 0.;
+            reference = 0;
         }
 
         if (value.getFactor().getFunction() instanceof BranchFlow) {
-            stateResult.getReferenceFlows().putIfAbsent(value.getFactor().getFunction().getId(), reference);
+            if (Objects.isNull(stateResult.getReferenceFlows().get(value.getFactor().getFunction().getId())) ||
+                    Math.abs(stateResult.getReferenceFlows().get(value.getFactor().getFunction().getId())) < 0.0000001) {
+                stateResult.getReferenceFlows().put(value.getFactor().getFunction().getId(), reference);
+            }
             stateResult.getFlowSensitivities().computeIfAbsent(value.getFactor().getFunction().getId(), k -> new HashMap<>())
                     .putIfAbsent(value.getFactor().getVariable().getId(), sensitivity);
         } else if (value.getFactor().getFunction() instanceof BranchIntensity) {
