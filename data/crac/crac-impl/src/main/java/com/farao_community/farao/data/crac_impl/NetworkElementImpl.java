@@ -60,21 +60,21 @@ public class NetworkElementImpl extends AbstractIdentifiable<NetworkElement> imp
             throw new FaraoException("Network element " + this.getId() + " was not found in the network.");
         } else if (ne instanceof Branch) {
             Branch<?> branch = (Branch) ne;
-            Optional<Country> country1 = branch.getTerminal1().getVoltageLevel().getSubstation().getCountry();
-            Optional<Country> country2 = branch.getTerminal2().getVoltageLevel().getSubstation().getCountry();
+            Optional<Country> country1 = branch.getTerminal1().getVoltageLevel().getSubstation().get().getCountry();
+            Optional<Country> country2 = branch.getTerminal2().getVoltageLevel().getSubstation().get().getCountry();
             if (country1.equals(country2)) {
                 return Set.of(country1);
             } else {
                 return Set.of(country1, country2);
             }
         } else if (ne instanceof Switch) {
-            return Set.of(((Switch) ne).getVoltageLevel().getSubstation().getCountry());
+            return Set.of(((Switch) ne).getVoltageLevel().getSubstation().get().getCountry());
         } else if (ne instanceof Injection) {
-            return Set.of(((Injection<?>) ne).getTerminal().getVoltageLevel().getSubstation().getCountry());
+            return Set.of(((Injection<?>) ne).getTerminal().getVoltageLevel().getSubstation().get().getCountry());
         } else if (ne instanceof  Bus) {
-            return Set.of(((Bus) ne).getVoltageLevel().getSubstation().getCountry());
+            return Set.of(((Bus) ne).getVoltageLevel().getSubstation().get().getCountry());
         } else if (ne instanceof VoltageLevel) {
-            return Set.of(((VoltageLevel) ne).getSubstation().getCountry());
+            return Set.of(((VoltageLevel) ne).getSubstation().get().getCountry());
         } else if (ne instanceof Substation) {
             return Set.of(((Substation) ne).getCountry());
         }  else {

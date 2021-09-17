@@ -93,7 +93,7 @@ public final class GlskPointLinearGlskConverter {
         if (glskShiftKey.getPsrType().equals("A04")) {
             //Generator A04
             List<Generator> generators = network.getGeneratorStream()
-                    .filter(generator -> country.equals(generator.getTerminal().getVoltageLevel().getSubstation().getNullableCountry()))
+                    .filter(generator -> country.equals(generator.getTerminal().getVoltageLevel().getSubstation().get().getNullableCountry()))
                     .filter(NetworkUtil::isCorrectGenerator)
                     .collect(Collectors.toList());
             //calculate sum P of country's generators
@@ -103,7 +103,7 @@ public final class GlskPointLinearGlskConverter {
         } else if (glskShiftKey.getPsrType().equals("A05")) {
             //Load A05
             List<Load> loads = network.getLoadStream()
-                    .filter(load -> country.equals(load.getTerminal().getVoltageLevel().getSubstation().getNullableCountry()))
+                    .filter(load -> country.equals(load.getTerminal().getVoltageLevel().getSubstation().get().getNullableCountry()))
                     .filter(NetworkUtil::isCorrectLoad)
                     .collect(Collectors.toList());
             double totalCountryLoad = loads.stream().mapToDouble(NetworkUtil::pseudoP0).sum();

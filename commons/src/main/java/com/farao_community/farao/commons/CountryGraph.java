@@ -40,8 +40,8 @@ public class CountryGraph {
 
         network.getBranchStream()
             .forEach(branch -> {
-                Optional<Country> country1 = branch.getTerminal1().getVoltageLevel().getSubstation().getCountry();
-                Optional<Country> country2 = branch.getTerminal2().getVoltageLevel().getSubstation().getCountry();
+                Optional<Country> country1 = branch.getTerminal1().getVoltageLevel().getSubstation().get().getCountry();
+                Optional<Country> country2 = branch.getTerminal2().getVoltageLevel().getSubstation().get().getCountry();
 
                 if (country1.isPresent() && country2.isPresent()) {
                     if (!country1.equals(country2)) {

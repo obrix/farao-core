@@ -53,7 +53,7 @@ public final class NetworkUtil {
     }
 
     public static Country getBranchSideCountry(Branch branch, Branch.Side side) {
-        return branch.getTerminal(side).getVoltageLevel().getSubstation().getCountry().orElse(null);
+        return branch.getTerminal(side).getVoltageLevel().getSubstation().get().getCountry().orElse(null);
     }
 
     public static Injection getInjectionFrom(Network network, String id) {

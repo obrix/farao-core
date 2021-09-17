@@ -341,7 +341,7 @@ public class SearchTreeRaoProvider implements RaoProvider {
 
                             SearchTreeInput searchTreeInput = buildSearchTreeInput(
                                     raoInput.getCrac(),
-                                    raoInput.getNetwork(),
+                                    networkClone,
                                     optimizedState,
                                     stateTree.getPerimeter(optimizedState),
                                     initialSensitivityOutput,

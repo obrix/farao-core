@@ -345,8 +345,8 @@ public class CracImpl extends AbstractIdentifiable<Crac> implements Crac {
         String neId = flowCnecToRemove.getNetworkElement().getId();
         String stateId = flowCnecToRemove.getState().getId();
         flowCnecs.remove(flowCnecId);
-        safeRemoveNetworkElements(Collections.singleton(neId));
-        safeRemoveStates(Collections.singleton(stateId));
+        //safeRemoveNetworkElements(Collections.singleton(neId));
+        //safeRemoveStates(Collections.singleton(stateId));
     }
 
     void addFlowCnec(FlowCnec flowCnec) {
@@ -441,8 +441,8 @@ public class CracImpl extends AbstractIdentifiable<Crac> implements Crac {
 
         pstRangeActions.remove(id);
 
-        safeRemoveNetworkElements(associatedNetworkElementsIds);
-        safeRemoveStates(associatedStatesIds);
+        //safeRemoveNetworkElements(associatedNetworkElementsIds);
+        //safeRemoveStates(associatedStatesIds);
     }
 
     void addPstRangeAction(PstRangeAction pstRangeAction) {
@@ -488,8 +488,8 @@ public class CracImpl extends AbstractIdentifiable<Crac> implements Crac {
 
         networkActions.remove(id);
 
-        safeRemoveNetworkElements(associatedNetworkElementsIds);
-        safeRemoveStates(associatedStatesIds);
+        //safeRemoveNetworkElements(associatedNetworkElementsIds);
+        //safeRemoveStates(associatedStatesIds);
     }
 
     void addNetworkAction(NetworkAction networkAction) {

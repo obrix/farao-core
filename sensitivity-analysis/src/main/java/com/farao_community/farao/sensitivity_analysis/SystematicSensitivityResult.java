@@ -110,10 +110,12 @@ public class SystematicSensitivityResult {
         }
 
         if (value.getFactor().getFunction() instanceof BranchFlow) {
-            if (Objects.isNull(stateResult.getReferenceFlows().get(value.getFactor().getFunction().getId())) ||
+            /*if (Objects.isNull(stateResult.getReferenceFlows().get(value.getFactor().getFunction().getId())) ||
                     Math.abs(stateResult.getReferenceFlows().get(value.getFactor().getFunction().getId())) < 0.0000001) {
                 stateResult.getReferenceFlows().put(value.getFactor().getFunction().getId(), reference);
-            }
+            }*/
+
+            stateResult.getReferenceFlows().putIfAbsent(value.getFactor().getFunction().getId(), reference);
             stateResult.getFlowSensitivities().computeIfAbsent(value.getFactor().getFunction().getId(), k -> new HashMap<>())
                     .putIfAbsent(value.getFactor().getVariable().getId(), sensitivity);
         } else if (value.getFactor().getFunction() instanceof BranchIntensity) {

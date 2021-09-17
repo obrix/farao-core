@@ -171,7 +171,7 @@ public final class GlskPointScalableConverter {
         if (glskShiftKey.getPsrType().equals("A04")) {
             LOGGER.debug("GLSK Type B42, empty registered resources list --> country (proportional) GSK");
             List<Generator> generators = network.getGeneratorStream()
-                    .filter(generator -> country.equals(generator.getTerminal().getVoltageLevel().getSubstation().getNullableCountry()))
+                    .filter(generator -> country.equals(generator.getTerminal().getVoltageLevel().getSubstation().get().getNullableCountry()))
                     .filter(NetworkUtil::isCorrectGenerator)
                     .collect(Collectors.toList());
             //calculate sum P of country's generators
@@ -182,7 +182,7 @@ public final class GlskPointScalableConverter {
         } else if (glskShiftKey.getPsrType().equals("A05")) {
             LOGGER.debug("GLSK Type B42, empty registered resources list --> country (proportional) LSK");
             List<Load> loads = network.getLoadStream()
-                    .filter(load -> country.equals(load.getTerminal().getVoltageLevel().getSubstation().getNullableCountry()))
+                    .filter(load -> country.equals(load.getTerminal().getVoltageLevel().getSubstation().get().getNullableCountry()))
                     .filter(NetworkUtil::isCorrectLoad)
                     .collect(Collectors.toList());
             //calculate sum P of country's loads
