@@ -379,8 +379,6 @@ public class SearchTreeRaoProvider implements RaoProvider {
             networkPool.shutdownAndAwaitTermination(24, TimeUnit.HOURS);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
-        } finally {
-            networkPool.deleteAllNetworks();
         }
         return contingencyScenarioResults;
     }
